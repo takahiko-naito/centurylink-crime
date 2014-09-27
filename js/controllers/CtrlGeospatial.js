@@ -15,6 +15,23 @@ angular.module('cLink.controllers')
       }
     };
 
+    var uniqueIncidentGroupSuccess = function(data) {
+      var newdata = [];
+      _.each(data,function(x){ 
+        newdata.push({
+          count: parseInt(x.count), 
+          group: x.initial_type_group
+        }); 
+      });
+      
+      
+
+    }
+    SvcGeospatial.getAllUniqueIncidentGroups({success : function(data){
+      
+      
+    }, error: function(){} });
+
     angular.extend($scope, {
         defaults: {
             scrollWheelZoom: false

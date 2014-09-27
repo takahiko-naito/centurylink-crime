@@ -1,10 +1,16 @@
 'use strict';
 /*
 	SvcSocrata.js
-	-------------
+	=============
 	Author: Zach Cowell
 	Description: Service API wrapper for Socrata API calls. 
 	WARNING: Due to time constraints, not all methods are supported at this time and not all test cases have been evaluated.
+
+	Improvements for future consideration
+	-------------------------------------
+		- Adjust WHERE clause to accept ANDs, ORs, NOTs, etc.
+		- Abstract out location specific functionality for the where clause (e.g., within_circle, within_box methods)
+		- Better error handling.
 */
 
 angular.module('cLink.services')
@@ -40,7 +46,7 @@ angular.module('cLink.services')
         	return '$order=' + order + '&' ;
         },
         getGroupClause : function(group){
-        	return '';
+        	return '$group=' + group + '&';
         },
         getLimitClause : function(limit){
         	return '$limit=' + limit + '&';
@@ -71,8 +77,10 @@ angular.module('cLink.services')
         },
         getJSON : function (endpoint,queryString,callbacks){
         	var request = endpoint;
+        	var success = callbacks ? callbacks.success : function(data) { console.log(data); }
+        	var error = callbacks ? callbacks.error : function(err) { console.log(err); }
         	if (queryString) { request+= '?' + queryString; }
-        	$http.get(request).success(callbacks.success).error(callbacks.error);
+        	$http.get(request).success(success).error(error);
         }        
     };
 });
