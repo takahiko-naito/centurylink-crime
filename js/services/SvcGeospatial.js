@@ -8,7 +8,7 @@ angular.module('cLink.services')
                 center: {
                     lat: 47.59482,
                     lng: -122.333037,
-                    zoom: 14
+                    zoom: 13
                 },
                 defaults : {
                     scrollWheelZoom : true

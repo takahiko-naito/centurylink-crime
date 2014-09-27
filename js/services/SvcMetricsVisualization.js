@@ -29,7 +29,6 @@ angular.module('cLink.services')
     return {
         getIncidentBreakdownDonutChart : function(data) {
         
-
         var colors = Highcharts.getOptions().colors;
         var colorIndex = 0;
         var chartData = [];
