@@ -53,11 +53,35 @@ at_scene_time
             var queryObject = {
                 select : ['event_clearance_date', 'event_clearance_description', 'event_clearance_subgroup', 'event_clearance_group', 'incident_location', 'initial_type_description', 'initial_type_subgroup', 'initial_type_group', 'at_scene_time']
                 ,where : ['within_circle(incident_location,47.59482,-122.333037,1609.34)']
-                ,order : ['event_clearance_date ASC']
+                ,order : ['event_clearance_date DESC']
                 ,limit : [50]
             };
             var query = SvcSocrata.getQueryString(queryObject);
             SvcSocrata.getJSON(endpoint,query,callbacks)
+        },
+        getLeafletMapDefaults : function(){
+            return {
+                center: {
+                    lat: 47.59482,
+                    lng: -122.333037,
+                    zoom: 14
+                },
+                defaults : {
+                    scrollWheelZoom : false
+                }
+            };
+        },
+        getIncidentLocationMarkers : function(data){
+            var markers = {};
+            _.each(data,function(incident){
+                markers[incident.cad_cdw_id] = {
+                    lat : incident.incident_location.latitude,
+                    lng : incident.incident_location.longitude,
+                    message : incident.initial_type_description,
+                    focus : false,
+                    draggable : false
+                }
+            });
         }        
     };
 });
