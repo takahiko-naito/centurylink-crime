@@ -1,5 +1,10 @@
 angular.module('cLink.controllers')
 .controller('CtrlGeospatial', 
-  function($route,$scope,$http) {
-    console.log('stuff')
-});
+  function($scope,SvcGeospatial) {
+    var success = function(data){
+      console.log(data);
+    }
+
+    SvcGeospatial.getJSON(success);
+  }
+);

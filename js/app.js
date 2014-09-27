@@ -1,10 +1,7 @@
 var app = angular.module('cLink', [
   'cLink.controllers',
-  //'cLink.services',
+  'cLink.services',
   'ngRoute',
-  //'lamApp.filters',
-  //'fsCordova',
-  //'ngAnimate',
   'leaflet-directive'
 ]);
 
