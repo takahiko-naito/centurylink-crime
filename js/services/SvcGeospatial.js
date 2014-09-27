@@ -16,7 +16,14 @@ angular.module('cLink.services')
             };
         },
         getMarkerMessageText : function(incident){
-            return incident.initial_type_description; //TODO : make marker display more information
+            var at_scene_time = new Date(incident.at_scene_time);
+            var d = at_scene_time.getDate();
+            var m = at_scene_time.getMonth() + 1;
+            var y = at_scene_time.getFullYear();
+    
+            return '<strong>' + incident.initial_type_group + '</strong> ('+ m + "-" + d + "-" + y + ')<br>'
+                    + incident.initial_type_subgroup + '<br>'
+                    + incident.initial_type_description; 
         },
         getLeafletMarkerIcon : function(incident){
             var markerObject = SvcRandomFontAwesome.getMarkerMapping(incident.initial_type_group);

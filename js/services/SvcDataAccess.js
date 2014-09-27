@@ -38,6 +38,9 @@ angular.module('cLink.services')
             });
             SvcSocrata.getJSON(endpoint,query,callbacks);
         },
+        getNearbyIncidentsWithFilters : function(query,callbacks){
+            SvcSocrata.getJSON(endpoint,query,callbacks);
+        },
         getAllUniqueIncidentGroups : function(callbacks){
             var query = SvcSocrata.getQueryString({
                 select : ['initial_type_group','count(*)']
