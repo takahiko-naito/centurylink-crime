@@ -67,17 +67,21 @@ at_scene_time
                     zoom: 14
                 },
                 defaults : {
-                    scrollWheelZoom : false
+                    scrollWheelZoom : true
                 }
             };
         },
+        getMarkerMessageText : function(incident){
+            return incident.initial_type_description; //TODO : make marker display more information
+        },
         getIncidentLocationMarkers : function(data){
             var markers = [];
+            var that = this;
             _.each(data,function(incident){
                 markers.push({
                     lat : parseFloat(incident.incident_location.latitude),
                     lng : parseFloat(incident.incident_location.longitude),
-                    message : incident.initial_type_description,
+                    message : that.getMarkerMessageText(incident),
                     focus : false,
                     draggable : false
                 })
