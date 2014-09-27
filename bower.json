@@ -1,0 +1,21 @@
+{
+  "name": "century-link",
+  "version": "0.0.0",
+  "authors": [
+    "zachcowell@zachcowell.com"
+  ],
+  "description": "Visualization of crimes within 1 mile of CenturyLink field",
+  "main": "app.js",
+  "keywords": [
+    "socrata",
+    "crime"
+  ],
+  "license": "MIT",
+  "homepage": "github.com/zachcowell",
+  "dependencies": {
+    "underscore": "~1.7.0",
+    "angular": "~1.2.25",
+    "leaflet": "~0.7.3",
+    "bootstrap-css-only": "~3.2.0"
+  }
+}
