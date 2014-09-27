@@ -27,6 +27,45 @@
 angular.module('cLink.services')
 .service('SvcMetricsVisualization', function () {
     return {
+        getTimeSeriesHelper : function(data){
+            
+            var seriesObj = [];
+            _.each(data,function(item){
+                var dateTime = new Date(item.month);
+                var d = dateTime.getDate();
+                var m = dateTime.getMonth() + 1;
+                var y = dateTime.getFullYear();
+                var point = parseInt(item.count);
+                seriesObj.push([Date.UTC(y,m,d),point]); 
+            });
+            return seriesObj;
+            //chartConfig.series.push({ name: 'Inspections', data: seriesObj });
+     
+        },
+        getIncidentTimeSeriesChart : function(data){
+            var series = this.getTimeSeriesHelper(data);
+            console.log(series);
+            return {
+             options: {
+                 chart: {
+                     type: 'spline'
+                 },
+                xAxis: { 
+                    type: 'datetime',title: { enabled: false, text: 'Date' },
+                },
+
+             },
+             series: [{
+                name: 'Incidents',
+                data: series
+             }],
+             //Title configuration (optional)
+             title: {
+                 text: 'Incident Count Over Time'
+             }
+
+            };
+        },
         getIncidentBreakdownDonutChart : function(data) {
         
         var colors = Highcharts.getOptions().colors;
@@ -90,7 +129,7 @@ angular.module('cLink.services')
             return {
                 options: {
                     chart: { type: 'pie' },
-                    title: { text: 'Incident Breakdown by Group and Subgroup' },
+                    title: { text: 'Incident Breakdown (Group, Subgroup)' },
                     yAxis: {
                         title: {
                             text: 'Total percentage'
@@ -107,23 +146,17 @@ angular.module('cLink.services')
                 series: [{
                     name: 'Incident Group',
                     data: groupingData,
-                    size: '60%',
+                    size: '90%',
                     dataLabels: {
-                        formatter: function () {
-                            return this.y > 5 ? this.point.name : null;
-                        },
-                        distance: -30
+                        enabled: false
                     }
                 }, {
                     name: 'Incident Subgroup',
                     data: subgroupingData,
-                    size: '80%',
-                    innerSize: '60%',
+                    size: '100%',
+                    innerSize: '90%',
                     dataLabels: {
-                        formatter: function () {
-                            // display only if larger than 1
-                            return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.y + '%'  : null;
-                        }
+                        enabled: false
                     }
                 }]
             }

@@ -29,10 +29,19 @@ angular.module('cLink.services')
 */
 
     return {
+        getYearMonthBreakdownOverTime : function(callbacks){
+            var query = SvcSocrata.getQueryString({
+                select : ['date_trunc_ym(at_scene_time) AS month','count(*)']
+                ,where : ['within_circle(incident_location,47.59482,-122.333037,1609.34)','at_scene_time IS NOT NULL']
+                ,group : ['month']
+                ,order : ['month']
+            });
+            SvcSocrata.getJSON(endpoint,query,callbacks);
+        },
         getAllNearbyIncidents : function(callbacks){ 
             var query = SvcSocrata.getQueryString({
-                where : ['within_circle(incident_location,47.59482,-122.333037,1609.34)']
-                ,order : ['event_clearance_date DESC']
+                where : ['within_circle(incident_location,47.59482,-122.333037,1609.34)','at_scene_time IS NOT NULL']
+                ,order : ['at_scene_time DESC']
                 ,limit : [50]
             });
             SvcSocrata.getJSON(endpoint,query,callbacks);

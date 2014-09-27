@@ -36,7 +36,7 @@ angular.module('cLink.services')
         },
         getWhereClause : function(where){
 			if (where.length > 0) {
-				return '$where=' + where.join(' AND') + '&'; //Assuming all ands for my particular cases; will add in other operators later.
+				return '$where=' + where.join(' AND ') + '&'; //Assuming all ands for my particular cases; will add in other operators later.
 			}
 			else {
 				return '';

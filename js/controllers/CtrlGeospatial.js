@@ -7,12 +7,20 @@ angular.module('cLink.controllers')
     $scope.chartConfig = {};
     $scope.incidents = [];
     var callbacks = {
-      success: function(data) {
-        $scope.mapDefaults.markers = SvcGeospatial.getIncidentLocationMarkers(data);
-        $scope.chartConfig = SvcMetricsVisualization.getIncidentBreakdownDonutChart(data);
-        $scope.incidents = data;
+      incidentLineItems: {
+        success: function(data) {
+          $scope.mapDefaults.markers = SvcGeospatial.getIncidentLocationMarkers(data);
+          $scope.chartConfig = SvcMetricsVisualization.getIncidentBreakdownDonutChart(data);
+          $scope.incidents = data;
+        }
+        ,error : function(err) { console.log(err); }
+      },
+      incidentAggregation : {
+        success: function(data){
+          $scope.chartConfigTimeSeries = SvcMetricsVisualization.getIncidentTimeSeriesChart(data);
+        },
+        error : function(err){console.log(err)}
       }
-      ,error : function(err) { console.log(err); }
     };
 
     $scope.fromDate;
@@ -23,12 +31,13 @@ angular.module('cLink.controllers')
       , refresh : {
         click : function() { 
           var queryObject = {};
-          SvcDataAccess.getNearbyIncidentsWithFilters(queryObject,callbacks);
+          //SvcDataAccess.getNearbyIncidentsWithFilters(queryObject,callbacks);
         }
       }
     };
 
-    SvcDataAccess.getAllNearbyIncidents(callbacks);
+    SvcDataAccess.getAllNearbyIncidents(callbacks.incidentLineItems);
+    SvcDataAccess.getYearMonthBreakdownOverTime(callbacks.incidentAggregation);
     
   }
 );
