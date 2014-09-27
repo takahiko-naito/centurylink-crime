@@ -72,16 +72,17 @@ at_scene_time
             };
         },
         getIncidentLocationMarkers : function(data){
-            var markers = {};
+            var markers = [];
             _.each(data,function(incident){
-                markers[incident.cad_cdw_id] = {
-                    lat : incident.incident_location.latitude,
-                    lng : incident.incident_location.longitude,
+                markers.push({
+                    lat : parseFloat(incident.incident_location.latitude),
+                    lng : parseFloat(incident.incident_location.longitude),
                     message : incident.initial_type_description,
                     focus : false,
                     draggable : false
-                }
+                })
             });
+            return markers;
         }        
     };
 });
