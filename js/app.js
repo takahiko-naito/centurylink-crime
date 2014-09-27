@@ -4,7 +4,8 @@ var app = angular.module('cLink', [
   'cLink.controllers',
   'cLink.services',
   'ngRoute',
-  'leaflet-directive'
+  'leaflet-directive',
+  'highcharts-ng'
 ]);
 
 
