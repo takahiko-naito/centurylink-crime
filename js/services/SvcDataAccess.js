@@ -31,8 +31,7 @@ angular.module('cLink.services')
     return {
         getAllNearbyIncidents : function(callbacks){ 
             var query = SvcSocrata.getQueryString({
-                select : ['event_clearance_date', 'event_clearance_description', 'event_clearance_subgroup', 'event_clearance_group', 'incident_location', 'initial_type_description', 'initial_type_subgroup', 'initial_type_group', 'at_scene_time']
-                ,where : ['within_circle(incident_location,47.59482,-122.333037,1609.34)']
+                where : ['within_circle(incident_location,47.59482,-122.333037,1609.34)']
                 ,order : ['event_clearance_date DESC']
                 ,limit : [50]
             });
