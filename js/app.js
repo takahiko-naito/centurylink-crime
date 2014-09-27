@@ -1,3 +1,5 @@
+'use strict';
+
 var app = angular.module('cLink', [
   'cLink.controllers',
   'cLink.services',
