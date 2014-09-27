@@ -16,6 +16,9 @@
     "underscore": "~1.7.0",
     "angular": "~1.2.25",
     "leaflet": "~0.7.3",
-    "bootstrap-css-only": "~3.2.0"
+    "bootstrap-css-only": "~3.2.0",
+    "highcharts": "~4.0.4",
+    "jquery": "~2.1.1",
+    "angular-resource": "~1.2.25"
   }
 }
